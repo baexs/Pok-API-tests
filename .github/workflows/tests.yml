@@ -1,0 +1,14 @@
+name: PokéAPI Tests
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - run: npm install
+      - run: npx jest
+      - run: npm install -g newman
+      - run: newman run PokéAPI_Tests.postman_collection.json
